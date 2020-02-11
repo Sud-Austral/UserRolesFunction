@@ -1,0 +1,69 @@
+﻿@model IEnumerable<UsuariosRoles.Models.FUNCIONES>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DETALLLE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BORRAR.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EDITAR.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FORMULARIOS.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LEER.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ROLES.NOMBRE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DETALLLE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BORRAR.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EDITAR.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FORMULARIOS.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LEER.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ROLES.NOMBRE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,74 @@
+﻿@model UsuariosRoles.Models.FUNCIONES
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FUNCIONES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DETALLLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETALLLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BORRAR.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BORRAR.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITAR.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITAR.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FORMULARIOS.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FORMULARIOS.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LEER.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LEER.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLES.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLES.NOMBRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

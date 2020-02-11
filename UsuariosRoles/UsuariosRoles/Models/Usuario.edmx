@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BORRAR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EDITAR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FORMULARIOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUNCIONES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="DETALLLE" Type="varchar2" MaxLength="255" />
+          <Property Name="ROLES_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LEER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EDITAR_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BORRAR_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FORMULARIOS_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LEER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="DETALLLE" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="ROLES_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FUNCIONES_BORRAR_FK">
+          <End Role="BORRAR" Type="Self.BORRAR" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BORRAR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="BORRAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_EDITAR_FK">
+          <End Role="EDITAR" Type="Self.EDITAR" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDITAR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="EDITAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_FORMULARIOS_FK">
+          <End Role="FORMULARIOS" Type="Self.FORMULARIOS" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMULARIOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="FORMULARIOS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_LEER_FK">
+          <End Role="LEER" Type="Self.LEER" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="LEER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_ROLES_FK">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="ROLES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIOS_ROLES_FK">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="ROLES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BORRAR" EntityType="Self.BORRAR" Schema="ADMIN" store:Type="Tables" />
+          <EntitySet Name="EDITAR" EntityType="Self.EDITAR" Schema="ADMIN" store:Type="Tables" />
+          <EntitySet Name="FORMULARIOS" EntityType="Self.FORMULARIOS" Schema="ADMIN" store:Type="Tables" />
+          <EntitySet Name="FUNCIONES" EntityType="Self.FUNCIONES" Schema="ADMIN" store:Type="Tables" />
+          <EntitySet Name="LEER" EntityType="Self.LEER" Schema="ADMIN" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="ADMIN" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="ADMIN" store:Type="Tables" />
+          <AssociationSet Name="FUNCIONES_BORRAR_FK" Association="Self.FUNCIONES_BORRAR_FK">
+            <End Role="BORRAR" EntitySet="BORRAR" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_EDITAR_FK" Association="Self.FUNCIONES_EDITAR_FK">
+            <End Role="EDITAR" EntitySet="EDITAR" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_FORMULARIOS_FK" Association="Self.FUNCIONES_FORMULARIOS_FK">
+            <End Role="FORMULARIOS" EntitySet="FORMULARIOS" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_LEER_FK" Association="Self.FUNCIONES_LEER_FK">
+            <End Role="LEER" EntitySet="LEER" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_ROLES_FK" Association="Self.FUNCIONES_ROLES_FK">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIOS_ROLES_FK" Association="Self.USUARIOS_ROLES_FK">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BORRAR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FUNCIONES" Relationship="Self.FUNCIONES_BORRAR_FK" FromRole="BORRAR" ToRole="FUNCIONES" />
+        </EntityType>
+        <EntityType Name="EDITAR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FUNCIONES" Relationship="Self.FUNCIONES_EDITAR_FK" FromRole="EDITAR" ToRole="FUNCIONES" />
+        </EntityType>
+        <EntityType Name="FORMULARIOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FUNCIONES" Relationship="Self.FUNCIONES_FORMULARIOS_FK" FromRole="FORMULARIOS" ToRole="FUNCIONES" />
+        </EntityType>
+        <EntityType Name="FUNCIONES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DETALLLE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ROLES_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LEER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EDITAR_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BORRAR_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FORMULARIOS_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="BORRAR" Relationship="Self.FUNCIONES_BORRAR_FK" FromRole="FUNCIONES" ToRole="BORRAR" />
+          <NavigationProperty Name="EDITAR" Relationship="Self.FUNCIONES_EDITAR_FK" FromRole="FUNCIONES" ToRole="EDITAR" />
+          <NavigationProperty Name="FORMULARIOS" Relationship="Self.FUNCIONES_FORMULARIOS_FK" FromRole="FUNCIONES" ToRole="FORMULARIOS" />
+          <NavigationProperty Name="LEER" Relationship="Self.FUNCIONES_LEER_FK" FromRole="FUNCIONES" ToRole="LEER" />
+          <NavigationProperty Name="ROLES" Relationship="Self.FUNCIONES_ROLES_FK" FromRole="FUNCIONES" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="LEER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FUNCIONES" Relationship="Self.FUNCIONES_LEER_FK" FromRole="LEER" ToRole="FUNCIONES" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DETALLLE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FUNCIONES" Relationship="Self.FUNCIONES_ROLES_FK" FromRole="ROLES" ToRole="FUNCIONES" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.USUARIOS_ROLES_FK" FromRole="ROLES" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROLES_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ROLES" Relationship="Self.USUARIOS_ROLES_FK" FromRole="USUARIOS" ToRole="ROLES" />
+        </EntityType>
+        <Association Name="FUNCIONES_BORRAR_FK">
+          <End Role="BORRAR" Type="Self.BORRAR" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BORRAR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="BORRAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_EDITAR_FK">
+          <End Role="EDITAR" Type="Self.EDITAR" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDITAR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="EDITAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_FORMULARIOS_FK">
+          <End Role="FORMULARIOS" Type="Self.FORMULARIOS" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMULARIOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="FORMULARIOS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_LEER_FK">
+          <End Role="LEER" Type="Self.LEER" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="LEER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FUNCIONES_ROLES_FK">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FUNCIONES">
+              <PropertyRef Name="ROLES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIOS_ROLES_FK">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="ROLES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BORRAR" EntityType="Self.BORRAR" />
+          <EntitySet Name="EDITAR" EntityType="Self.EDITAR" />
+          <EntitySet Name="FORMULARIOS" EntityType="Self.FORMULARIOS" />
+          <EntitySet Name="FUNCIONES" EntityType="Self.FUNCIONES" />
+          <EntitySet Name="LEER" EntityType="Self.LEER" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <AssociationSet Name="FUNCIONES_BORRAR_FK" Association="Self.FUNCIONES_BORRAR_FK">
+            <End Role="BORRAR" EntitySet="BORRAR" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_EDITAR_FK" Association="Self.FUNCIONES_EDITAR_FK">
+            <End Role="EDITAR" EntitySet="EDITAR" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_FORMULARIOS_FK" Association="Self.FUNCIONES_FORMULARIOS_FK">
+            <End Role="FORMULARIOS" EntitySet="FORMULARIOS" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_LEER_FK" Association="Self.FUNCIONES_LEER_FK">
+            <End Role="LEER" EntitySet="LEER" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONES_ROLES_FK" Association="Self.FUNCIONES_ROLES_FK">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIOS_ROLES_FK" Association="Self.USUARIOS_ROLES_FK">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="BORRAR">
+            <EntityTypeMapping TypeName="Model.BORRAR">
+              <MappingFragment StoreEntitySet="BORRAR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EDITAR">
+            <EntityTypeMapping TypeName="Model.EDITAR">
+              <MappingFragment StoreEntitySet="EDITAR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORMULARIOS">
+            <EntityTypeMapping TypeName="Model.FORMULARIOS">
+              <MappingFragment StoreEntitySet="FORMULARIOS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNCIONES">
+            <EntityTypeMapping TypeName="Model.FUNCIONES">
+              <MappingFragment StoreEntitySet="FUNCIONES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DETALLLE" ColumnName="DETALLLE" />
+                <ScalarProperty Name="ROLES_ID" ColumnName="ROLES_ID" />
+                <ScalarProperty Name="LEER_ID" ColumnName="LEER_ID" />
+                <ScalarProperty Name="EDITAR_ID" ColumnName="EDITAR_ID" />
+                <ScalarProperty Name="BORRAR_ID" ColumnName="BORRAR_ID" />
+                <ScalarProperty Name="FORMULARIOS_ID" ColumnName="FORMULARIOS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LEER">
+            <EntityTypeMapping TypeName="Model.LEER">
+              <MappingFragment StoreEntitySet="LEER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="Model.ROLES">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DETALLLE" ColumnName="DETALLLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="Model.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="ROLES_ID" ColumnName="ROLES_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
