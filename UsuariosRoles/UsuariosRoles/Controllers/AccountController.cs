@@ -75,6 +75,8 @@ namespace UsuariosRoles.Controllers
                 ViewBag.User = model.Email;
                 model.Email = "a@a.cl";
                 model.Password = "Arbol1!";
+                USUARIOS uSUARIO = db.USUARIOS.Where(x => x.NOMBRE == model.Email && x.PASSWORD == model.Password).First();
+                Session["user"] = uSUARIO;
             }
             
             if (!ModelState.IsValid)

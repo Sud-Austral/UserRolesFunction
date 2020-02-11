@@ -21,9 +21,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 @using Microsoft.AspNet.Identity
+                @using UsuariosRoles.Models
                 @if (Request.IsAuthenticated)
                 {
-
+                    USUARIOS asp = (USUARIOS)Session["user"];
+                    <p>@asp.NOMBRE</p>
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Usuarios", "Index", "USUARIOS")</li>
                         <li>@Html.ActionLink("Roles", "Index", "ROLES")</li>
@@ -32,9 +34,9 @@
                     </ul>
 
 
-                }
-                @Html.Partial("_LoginPartial")
-            </div>
+                        }
+                        @Html.Partial("_LoginPartial")
+                </div>
         </div>
     </div>
     <div class="container body-content">
