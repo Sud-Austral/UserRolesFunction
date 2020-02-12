@@ -72,9 +72,15 @@ namespace UsuariosRoles.Controllers
             var name = model.Email;
             if(db.USUARIOS.Where(x => x.NOMBRE == model.Email && x.PASSWORD == model.Password).ToArray().Count() > 0)
             {
-                ViewBag.User = model.Email;
+                var uSUARIO = db.USUARIOS.Where(x => x.NOMBRE == model.Email && x.PASSWORD == model.Password).ToList();
+                USUARIOS user = uSUARIO[0];
+                Session["user"] = user;
+                var funciones = db.FUNCIONES.Where(x => x.ROLES_ID == user.ROLES_ID);
+                Session["funciones"] = funciones.ToList();
+                Session["datoSesion"] = new DatoSesion(model);
                 model.Email = "a@a.cl";
                 model.Password = "Arbol1!";
+                
             }
             
             if (!ModelState.IsValid)
@@ -402,6 +408,12 @@ namespace UsuariosRoles.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Salir()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("PreLogin", "Home");
         }
 
         //

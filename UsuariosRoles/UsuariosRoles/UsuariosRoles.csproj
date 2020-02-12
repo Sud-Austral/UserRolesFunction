@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DatoSesion.cs" />
     <Compile Include="Controllers\FORMULARIOSController.cs" />
     <Compile Include="Controllers\FUNCIONESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -320,6 +321,8 @@
     <Content Include="Views\FORMULARIOS\Details.cshtml" />
     <Content Include="Views\FORMULARIOS\Edit.cshtml" />
     <Content Include="Views\FORMULARIOS\Index.cshtml" />
+    <Content Include="Views\Home\NewIndex.cshtml" />
+    <Content Include="Views\Home\PreLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

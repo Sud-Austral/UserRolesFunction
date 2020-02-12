@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "NewIndex";
+}
+
+<h2>NewIndex</h2>
+<p>@ViewBag.user</p>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Detalle</td>
+                <td>Formulario</td>
+                <td>Leer</td>
+                <td>Editar</td>
+                <td>Borrar</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.funciones)
+            {
+            <tr>
+                <td>@item.NOMBRE</td>
+                <td>@item.DETALLLE</td>
+                <td>
+                    
+                    <a href="/@item.FORMULARIOS.NOMBRE">@item.FORMULARIOS.NOMBRE</a>
+                            </td>
+                <td>@item.LEER.ID</td>
+                <td>@item.EDITAR.ID</td>
+                <td>@item.BORRAR.ID</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+

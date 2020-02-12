@@ -17,7 +17,18 @@
         <th>
             @Html.DisplayNameFor(model => model.DETALLLE)
         </th>
-        <th></th>
+        @if (ViewBag.funcion.LEER_ID == 1)
+        {
+            <th>Leer</th>
+        }
+        @if (ViewBag.funcion.EDITAR_ID == 1)
+        {
+            <th>Editar</th>
+        }
+        @if (ViewBag.funcion.BORRAR_ID == 1)
+        {
+            <th>Borrar</th>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -29,9 +40,22 @@
             @Html.DisplayFor(modelItem => item.DETALLLE)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @if (ViewBag.funcion.LEER_ID == 1)
+            {
+                @Html.ActionLink("Leer", "Details", new { id = item.ID })
+            }
+        </td>
+        <td>
+            @if (ViewBag.funcion.EDITAR_ID == 1)
+            {
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID })
+            }
+        </td>
+        <td>
+            @if (ViewBag.funcion.BORRAR_ID == 1)
+            {
+                @Html.ActionLink("Borrar", "Delete", new { id = item.ID })
+            }
         </td>
     </tr>
 }
