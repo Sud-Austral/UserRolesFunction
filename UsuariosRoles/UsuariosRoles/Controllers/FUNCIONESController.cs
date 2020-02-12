@@ -13,6 +13,8 @@ namespace UsuariosRoles.Controllers
     public class FUNCIONESController : Controller
     {
         private Entities db = new Entities();
+        private string nombre = "Funciones".ToLower();
+        string metodo;
 
         // GET: FUNCIONES
         public ActionResult Index()
@@ -100,6 +102,8 @@ namespace UsuariosRoles.Controllers
             {
                 db.Entry(fUNCIONES).State = EntityState.Modified;
                 db.SaveChanges();
+                DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+                Session["datoSesion"] = new DatoSesion(datoSesion.user.NOMBRE, datoSesion.user.PASSWORD);
                 return RedirectToAction("Index");
             }
             ViewBag.BORRAR_ID = new SelectList(db.BORRAR, "ID", "NOMBRE", fUNCIONES.BORRAR_ID);

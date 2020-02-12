@@ -13,10 +13,15 @@ namespace UsuariosRoles.Controllers
     public class ROLESController : Controller
     {
         private Entities db = new Entities();
+        private string nombre = "Roles".ToLower();
+        string metodo;
 
         // GET: ROLES
         public ActionResult Index()
         {
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            FUNCIONES funcion = datoSesion.getFuncion(nombre);
+            ViewBag.funcion = funcion;
             return View(db.ROLES.ToList());
         }
 
@@ -50,6 +55,7 @@ namespace UsuariosRoles.Controllers
         {
             if (ModelState.IsValid)
             {
+                rOLES.ID = db.ROLES.Max(x => x.ID) + 1;
                 db.ROLES.Add(rOLES);
                 db.SaveChanges();
                 return RedirectToAction("Index");
