@@ -50,6 +50,7 @@ namespace UsuariosRoles.Controllers
         {
             if (ModelState.IsValid)
             {
+                fORMULARIOS.ID = db.FORMULARIOS.Max(x => x.ID) + 1;
                 db.FORMULARIOS.Add(fORMULARIOS);
                 db.SaveChanges();
                 return RedirectToAction("Index");

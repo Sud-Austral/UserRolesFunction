@@ -58,6 +58,7 @@ namespace UsuariosRoles.Controllers
         {
             if (ModelState.IsValid)
             {
+                fUNCIONES.ID = db.FUNCIONES.Max(x => x.ID) + 1;
                 db.FUNCIONES.Add(fUNCIONES);
                 db.SaveChanges();
                 return RedirectToAction("Index");
