@@ -5,65 +5,100 @@
 }
 
 <h2>Index</h2>
+@if (ViewBag.funcion.LEER_ID == 1)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DETALLLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BORRAR.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EDITAR.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FORMULARIOS.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LEER.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ROLES.NOMBRE)
+            </th>
+            @if (ViewBag.funcion.LEER_ID == 1)
+            {
+                <th>Leer</th>
+            }
+            @if (ViewBag.funcion.EDITAR_ID == 1)
+            {
+                <th>Editar</th>
+            }
+            @if (ViewBag.funcion.BORRAR_ID == 1)
+            {
+                <th>Borrar</th>
+            }
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DETALLLE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BORRAR.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EDITAR.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FORMULARIOS.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LEER.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ROLES.NOMBRE)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DETALLLE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BORRAR.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EDITAR.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FORMULARIOS.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LEER.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROLES.NOMBRE)
+                </td>
+                @if (ViewBag.funcion.LEER_ID == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Leer", "Details", new { id = item.ID })
+                    </td>
+                }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DETALLLE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BORRAR.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EDITAR.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FORMULARIOS.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LEER.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ROLES.NOMBRE)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+
+                @if (ViewBag.funcion.EDITAR_ID == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID })
+                    </td>
+                }
+
+
+                @if (ViewBag.funcion.BORRAR_ID == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Borrar", "Delete", new { id = item.ID })
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
 }
-
-</table>
+else
+{
+    <h1>Usted no tiene autorización para ver estos registros</h1>
+}

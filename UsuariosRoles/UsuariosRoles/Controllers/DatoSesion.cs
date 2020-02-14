@@ -51,6 +51,15 @@ namespace UsuariosRoles.Controllers
             return salida;
         }
 
+        public static FUNCIONES FuncionSinDatos()
+        {
+            FUNCIONES salida = new FUNCIONES();
+            salida.BORRAR_ID = 2;
+            salida.EDITAR_ID = 2;
+            salida.LEER_ID = 2;
+            return salida;
+        }
+
         public bool RevisarPermiso(string nombre, string metodo)
         {
             bool salida = true;

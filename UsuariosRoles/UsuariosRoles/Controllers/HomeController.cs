@@ -15,12 +15,13 @@ namespace UsuariosRoles.Controllers
         private Entities db = new Entities();
         public ActionResult Index()
         {
+            
             DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
             if (datoSesion == null)
             {
                 return RedirectToAction("Salir", "Account");
             }
-
+            
             return View();
         }
 

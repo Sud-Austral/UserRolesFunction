@@ -74,9 +74,12 @@ namespace UsuariosRoles.Controllers
             {
                 var uSUARIO = db.USUARIOS.Where(x => x.NOMBRE == model.Email && x.PASSWORD == model.Password).ToList();
                 USUARIOS user = uSUARIO[0];
-                Session["user"] = user;
+                //Response.Cookies["user"].Value = user.ID.ToString();
+                
+                //Response.Cookies["algo"].
+                //Session["user"] = user;
                 var funciones = db.FUNCIONES.Where(x => x.ROLES_ID == user.ROLES_ID);
-                Session["funciones"] = funciones.ToList();
+                //Session["funciones"] = funciones.ToList();
                 Session["datoSesion"] = new DatoSesion(model);
                 model.Email = "a@a.cl";
                 model.Password = "Arbol1!";

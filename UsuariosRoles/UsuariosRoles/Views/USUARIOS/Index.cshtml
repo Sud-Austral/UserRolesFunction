@@ -5,65 +5,77 @@
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PASSWORD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ROLES.NOMBRE)
-        </th>
-        @if (ViewBag.funcion.LEER_ID == 1)
-        {
-            <th>Leer</th>
-        }
-        @if (ViewBag.funcion.EDITAR_ID == 1)
-        {
-            <th>Editar</th>
-        }
-        @if (ViewBag.funcion.BORRAR_ID == 1)
-        {
-            <th>Borrar</th>
-        }
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PASSWORD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ROLES.NOMBRE)
-        </td>
-        <td>
+@if (ViewBag.funcion.LEER_ID == 1)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PASSWORD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ROLES.NOMBRE)
+            </th>
             @if (ViewBag.funcion.LEER_ID == 1)
             {
-                @Html.ActionLink("Leer", "Details", new { id = item.ID })
+                <th>Leer</th>
             }
-        </td>
-        <td>
             @if (ViewBag.funcion.EDITAR_ID == 1)
             {
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID })
+                <th>Editar</th>
             }
-        </td>
-        <td>
             @if (ViewBag.funcion.BORRAR_ID == 1)
             {
-                @Html.ActionLink("Borrar", "Delete", new { id = item.ID })
+                <th>Borrar</th>
             }
-        </td>
-    </tr>
-}
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PASSWORD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROLES.NOMBRE)
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Leer", "Details", new { id = item.ID })
+                </td>
+                
+
+
+                @if (ViewBag.funcion.EDITAR_ID == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID })
+                    </td>
+                }
+
+
+                @if (ViewBag.funcion.BORRAR_ID == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Borrar", "Delete", new { id = item.ID })
+                    </td>
+                }
+
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h1>Usted no tiene autorización para ver estos registros</h1>
+}

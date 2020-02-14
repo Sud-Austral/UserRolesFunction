@@ -14,20 +14,27 @@ namespace UsuariosRoles.Controllers
     {
         private Entities db = new Entities();
         private string nombre = "Roles".ToLower();
-        string metodo;
-
+        private string metodo;
+        private DatoSesion datoSesion;
         // GET: ROLES
         public ActionResult Index()
         {
-            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
-            FUNCIONES funcion = datoSesion.getFuncion(nombre);
-            ViewBag.funcion = funcion;
+            datoSesion = (DatoSesion)Session["datoSesion"];
+            ViewBag.funcion = datoSesion.getFuncion(nombre);
             return View(db.ROLES.ToList());
         }
 
         // GET: ROLES/Details/5
         public ActionResult Details(decimal id)
         {
+            metodo = "LEER";
+            datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -67,6 +74,14 @@ namespace UsuariosRoles.Controllers
         // GET: ROLES/Edit/5
         public ActionResult Edit(decimal id)
         {
+            metodo = "EDITAR";
+            datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,6 +113,14 @@ namespace UsuariosRoles.Controllers
         // GET: ROLES/Delete/5
         public ActionResult Delete(decimal id)
         {
+            metodo = "BORRAR";
+            datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

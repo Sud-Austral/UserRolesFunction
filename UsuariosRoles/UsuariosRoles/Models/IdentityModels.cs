@@ -21,13 +21,30 @@ namespace UsuariosRoles.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            //: base("DefaultConnection", throwIfV1Schema: false)
+            : base("OracleDbContext", throwIfV1Schema: false)
+            
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); // MUST go first.
+
+            modelBuilder.HasDefaultSchema("ADMIN"); // Use uppercase!
+
+            modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers".ToUpper());
+            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles".ToUpper());
+            modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles".ToUpper());
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins".ToUpper());
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims".ToUpper());
+
+
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
     }
 }
