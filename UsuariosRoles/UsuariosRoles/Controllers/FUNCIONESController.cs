@@ -19,6 +19,9 @@ namespace UsuariosRoles.Controllers
         // GET: FUNCIONES
         public ActionResult Index()
         {
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            FUNCIONES funcion = datoSesion.getFuncion(nombre);
+            ViewBag.funcion = funcion;
             var fUNCIONES = db.FUNCIONES.Include(f => f.BORRAR).Include(f => f.EDITAR).Include(f => f.FORMULARIOS).Include(f => f.LEER).Include(f => f.ROLES);
             return View(fUNCIONES.ToList());
         }
@@ -26,6 +29,14 @@ namespace UsuariosRoles.Controllers
         // GET: FUNCIONES/Details/5
         public ActionResult Details(decimal id)
         {
+            metodo = "LEER";
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -60,6 +71,8 @@ namespace UsuariosRoles.Controllers
             {
                 fUNCIONES.ID = db.FUNCIONES.Max(x => x.ID) + 1;
                 db.FUNCIONES.Add(fUNCIONES);
+                DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+                Session["datoSesion"] = new DatoSesion(datoSesion.user.NOMBRE, datoSesion.user.PASSWORD);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -75,6 +88,14 @@ namespace UsuariosRoles.Controllers
         // GET: FUNCIONES/Edit/5
         public ActionResult Edit(decimal id)
         {
+            metodo = "EDITAR";
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +139,14 @@ namespace UsuariosRoles.Controllers
         // GET: FUNCIONES/Delete/5
         public ActionResult Delete(decimal id)
         {
+            metodo = "BORRAR";
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,6 +167,8 @@ namespace UsuariosRoles.Controllers
             FUNCIONES fUNCIONES = db.FUNCIONES.Find(id);
             db.FUNCIONES.Remove(fUNCIONES);
             db.SaveChanges();
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            Session["datoSesion"] = new DatoSesion(datoSesion.user.NOMBRE, datoSesion.user.PASSWORD);
             return RedirectToAction("Index");
         }
 

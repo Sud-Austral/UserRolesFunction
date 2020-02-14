@@ -15,16 +15,18 @@ namespace UsuariosRoles.Controllers
     {
         private Entities db = new Entities();
         private string nombre = "Usuarios".ToLower();
-        string metodo;
+        private string metodo;
+        private DatoSesion datoSesion;
 
         // GET: USUARIOS
         public ActionResult Index()
         {
-            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
-            List<FUNCIONES> funciones = (List<FUNCIONES>)Session["funciones"];
+            datoSesion = (DatoSesion)Session["datoSesion"];
+            //List<FUNCIONES> funciones = (List<FUNCIONES>)Session["funciones"];
             //FUNCIONES funcion = datoSesion.funciones.Where(x => x.FORMULARIOS.NOMBRE.ToLower() == nombre).First();
-            FUNCIONES funcion = datoSesion.getFuncion(nombre);
-            ViewBag.funcion = funcion;
+            // FUNCIONES funcion = datoSesion.getFuncion(nombre);
+            //ViewBag.funcion = funcion;
+            ViewBag.funcion = datoSesion.getFuncion(nombre);
             var uSUARIOS = db.USUARIOS.Include(u => u.ROLES);
             return View(uSUARIOS.ToList());
         }
@@ -33,7 +35,7 @@ namespace UsuariosRoles.Controllers
         public ActionResult Details(decimal id)
         {
             metodo = "LEER";
-            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            datoSesion = (DatoSesion)Session["datoSesion"];
             if (!datoSesion.RevisarPermiso(nombre, metodo))
             {
                 ViewBag.funcion = datoSesion.getFuncion(nombre);
@@ -82,7 +84,7 @@ namespace UsuariosRoles.Controllers
         public ActionResult Edit(decimal id)
         {
             metodo = "EDITAR";
-            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            datoSesion = (DatoSesion)Session["datoSesion"];
             if (!datoSesion.RevisarPermiso(nombre, metodo))
             {
                 ViewBag.funcion = datoSesion.getFuncion(nombre);
@@ -122,8 +124,8 @@ namespace UsuariosRoles.Controllers
         // GET: USUARIOS/Delete/5
         public ActionResult Delete(decimal id)
         {
-            metodo = "LEER";
-            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            metodo = "BORRAR";
+            datoSesion = (DatoSesion)Session["datoSesion"];
             if (!datoSesion.RevisarPermiso(nombre, metodo))
             {
                 ViewBag.funcion = datoSesion.getFuncion(nombre);

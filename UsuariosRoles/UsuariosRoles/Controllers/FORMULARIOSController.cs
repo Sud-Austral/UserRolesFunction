@@ -13,16 +13,36 @@ namespace UsuariosRoles.Controllers
     public class FORMULARIOSController : Controller
     {
         private Entities db = new Entities();
+        private string nombre = "Formularios".ToLower();
+        private string metodo;
+        private DatoSesion datoSesion;
 
         // GET: FORMULARIOS
         public ActionResult Index()
         {
+            datoSesion = (DatoSesion)Session["datoSesion"];
+            FUNCIONES funcion = datoSesion.getFuncion(nombre);
+            /*
+            if (datoSesion == null)
+            {
+                funcion = DatoSesion.FuncionSinDatos();
+            }
+            */
+            ViewBag.funcion = funcion;
             return View(db.FORMULARIOS.ToList());
         }
 
         // GET: FORMULARIOS/Details/5
         public ActionResult Details(decimal id)
         {
+            metodo = "LEER";
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,6 +82,14 @@ namespace UsuariosRoles.Controllers
         // GET: FORMULARIOS/Edit/5
         public ActionResult Edit(decimal id)
         {
+            metodo = "EDITAR";
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,6 +121,14 @@ namespace UsuariosRoles.Controllers
         // GET: FORMULARIOS/Delete/5
         public ActionResult Delete(decimal id)
         {
+            metodo = "BORRAR";
+            DatoSesion datoSesion = (DatoSesion)Session["datoSesion"];
+            if (!datoSesion.RevisarPermiso(nombre, metodo))
+            {
+                ViewBag.funcion = datoSesion.getFuncion(nombre);
+                var users = db.USUARIOS.Include(u => u.ROLES);
+                return View("Index", users.ToList());
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
